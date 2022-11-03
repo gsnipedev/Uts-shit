@@ -52,7 +52,7 @@ int main()
 
 
 	//terakhir, total gaji akan ditampilkan ke konsol
-	std::cout << "Total gaji: " << std::fixed << std::setprecision(2) << gaji << std::endl;
+	std::cout << "Total gaji: Rp " << std::fixed << std::setprecision(2) << gaji << std::endl;
 
 
 
