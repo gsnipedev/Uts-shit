@@ -38,7 +38,7 @@ public:
 		ProcessRawatJalan();
 	}
 
-	int getHargaRawatInap(int kelas, bool isBpjs, int hari)
+	float getHargaRawatInap(int kelas, bool isBpjs, int hari)
 	{
 		if (isBpjs) return HargaDokter + Kelas[kelas] * 0.5;
 
@@ -73,6 +73,7 @@ public:
 		std::cout << "Harga Dokter         | \t Rp." << 75000 << std::endl;
 		std::cout << "Harga Kamar/Hari     | \t Rp." << Kelas[KelasPilihan] << std::endl;
 		std::cout << "Lama Menginap (Hari) | \t" << LamaMenginap << std::endl;
+		std::cout << "Total Harga Kamar    | \t" << Kelas[KelasPilihan] * LamaMenginap << std::endl;
 
 		if (bIsBpjs) std::cout << "Diskon BPJS          | \t Rp." << Kelas[KelasPilihan] * 0.3 << std::endl;
 		else std::cout << "Diskon BPJS          | \t Rp." << Kelas[KelasPilihan] * 0 << std::endl;
@@ -121,7 +122,7 @@ public:
 	}
 
 private:
-	int getHargaRawatJalan(bool isBpjs)
+	float getHargaRawatJalan(bool isBpjs)
 	{
 		if (!isBpjs) return 100000;
 
@@ -131,9 +132,9 @@ private:
 	int getHargaRawatInap(bool isBpjs, int levelKelas)
 	{
 
-		if (!isBpjs) return (75000 + LamaMenginap * Kelas[levelKelas]) * 0.5;
+		if (isBpjs) return HargaDokter + (LamaMenginap * Kelas[levelKelas] * 0.5);
 
-		return 75000 + LamaMenginap * Kelas[levelKelas];
+		return HargaDokter + LamaMenginap * Kelas[levelKelas];
 	}
 
 };
@@ -144,9 +145,11 @@ int main()
 {
 	RumahSakit rumahSakit;
 
-	char shouldStop[1];
+	bool shouldStop = false;
 
-	while (true)
+	char chrShouldStop[] = "x";
+
+	while (shouldStop == false)
 	{
 		std::cout << "Masukkan Nama: ";
 		std::getline(std::cin, rumahSakit.NamaPasien);
@@ -164,8 +167,11 @@ int main()
 		}
 
 		std::cout << "Try Again [y/n]: ";
-		std::cin >> shouldStop;
+		std::cin >> chrShouldStop;
 
-		if (strcmp(shouldStop, (const char*)'n') == 0 || strcmp(shouldStop, (const char*)'N') == 0) break;
+		if (chrShouldStop[0] == 'n')
+		{
+			shouldStop = true;
+		}
 	}
 }
