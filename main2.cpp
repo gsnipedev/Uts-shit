@@ -70,7 +70,7 @@ public:
 
 		std::cout << "============================================================" << std::endl;
 		std::cout << "Nama                 | \t" << this->NamaPasien << std::endl;
-		std::cout << "Harga Dokter         | \t Rp." << 100000 << std::endl;
+		std::cout << "Harga Dokter         | \t Rp." << 75000 << std::endl;
 		std::cout << "Harga Kamar/Hari     | \t Rp." << Kelas[KelasPilihan] << std::endl;
 		std::cout << "Lama Menginap (Hari) | \t" << LamaMenginap << std::endl;
 
@@ -130,29 +130,42 @@ private:
 
 	int getHargaRawatInap(bool isBpjs, int levelKelas)
 	{
-		if (!isBpjs) return LamaMenginap * Kelas[levelKelas] * 0.5;
 
-		return LamaMenginap * Kelas[levelKelas];
+		if (!isBpjs) return (75000 + LamaMenginap * Kelas[levelKelas]) * 0.5;
+
+		return 75000 + LamaMenginap * Kelas[levelKelas];
 	}
 
 };
+
+
 
 int main()
 {
 	RumahSakit rumahSakit;
 
-	std::cout << "Masukkan Nama: ";
-	std::getline(std::cin, rumahSakit.NamaPasien);
+	char shouldStop[1];
 
-	std::cout << "Ingin rawat inap [1. Ya | 2. Tidak]: ";
-	std::cin >> rumahSakit.isRawatInap;
+	while (true)
+	{
+		std::cout << "Masukkan Nama: ";
+		std::getline(std::cin, rumahSakit.NamaPasien);
 
-	if (rumahSakit.isRawatInap == 2)
-	{
-		rumahSakit.ProcessRawatJalan();
-	}
-	else
-	{
-		rumahSakit.ProcessRawatInap();
+		std::cout << "Ingin rawat inap [1. Ya | 2. Tidak]: ";
+		std::cin >> rumahSakit.isRawatInap;
+
+		if (rumahSakit.isRawatInap == 2)
+		{
+			rumahSakit.ProcessRawatJalan();
+		}
+		else
+		{
+			rumahSakit.ProcessRawatInap();
+		}
+
+		std::cout << "Try Again [y/n]: ";
+		std::cin >> shouldStop;
+
+		if (strcmp(shouldStop, (const char*)'n') == 0 || strcmp(shouldStop, (const char*)'N') == 0) break;
 	}
 }
