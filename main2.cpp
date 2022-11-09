@@ -1,6 +1,5 @@
 #include<iostream>
 #include<map>
-#include<iterator>
 #include<string>
 
 
@@ -75,7 +74,7 @@ public:
 		std::cout << "Lama Menginap (Hari) | \t" << LamaMenginap << std::endl;
 		std::cout << "Total Harga Kamar    | \t" << Kelas[KelasPilihan] * LamaMenginap << std::endl;
 
-		if (bIsBpjs) std::cout << "Diskon BPJS          | \t Rp." << Kelas[KelasPilihan] * 0.3 << std::endl;
+		if (bIsBpjs) std::cout << "Diskon BPJS          | \t Rp." << LamaMenginap * Kelas[KelasPilihan] * 0.5 << std::endl;
 		else std::cout << "Diskon BPJS          | \t Rp." << Kelas[KelasPilihan] * 0 << std::endl;
 
 		std::cout << "============================================================" << std::endl;
@@ -118,7 +117,7 @@ public:
 		Kelas[1] = 100000;
 		Kelas[2] = 75000;
 		Kelas[3] = 50000;
-		Kelas[4] = 200000;
+		Kelas[4] = 200000; //kelas VIP
 	}
 
 private:
